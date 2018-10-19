@@ -1,0 +1,34 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>LOOKUP API</title>
+</head>
+<body>
+	<div id="controls">
+		<input type="text" id="upcInp" placeholder="Type Your UPC here">
+		<button id="send">Send</button>
+	</div>
+	<div id="display"></div>
+
+<script>
+	document.getElementById("send").addEventListener("click", function(){
+		var upcVal = document.getElementById("upcInp").value;
+
+		fetch("https://previews-bcit.herokuapp.com/barcode/:" + upcVal).then(function(resp){
+			console.log(resp);
+			return resp.json();
+		}).then(function(json){
+			console.log(json);
+			document.getElementById("display").innerHTML = "";
+			for (var i =0; i<json.length; i++){
+				var ndiv = document.createElement("div");
+				ndiv.innerHTML = json[i];
+				document.getElementById('display').appendChild(ndiv);
+			}
+		});
+
+	})
+</script>
+
+</body>
+</html>
