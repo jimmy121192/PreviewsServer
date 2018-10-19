@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
 
 
 // var results = [];
-app.get("/barcode/: upc", function(req, resp){
+app.get("/barcode/:upc", function(req, resp){
 	var upc = req.params.upc;
 
 	// results.push(product);
