@@ -14,9 +14,9 @@
 	document.getElementById("send").addEventListener("click", function(){
 		var upcVal = document.getElementById("upcInp").value;
 
-		fetch("http://api.walmartlabs.com/v1/items?apiKey=c9tjdnbch2ehb7ta56qsv46k&upc=" + upcVal).then(function(resp){
+		fetch("https://previews-bcit.herokuapp.com/barcode/" + upcVal).then(function(resp){
 			console.log(resp);
-			return resp.text();
+			return resp.json();
 		}).then(function(json){
 			console.log(json);
 			// document.getElementById("display").innerHTML = "";
