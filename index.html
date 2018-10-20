@@ -11,6 +11,7 @@
 	</div>
 	<div id="display" >
 		<img src='' id="thumbs"><br>
+		Product ID: <div id="productID" class="value"></div>
 		Product name: <div id="productname" class="value"></div>
 		Price: <div id="productprice" class="value"></div>
 		Stock: <div id="stock" class="value"></div>
@@ -21,20 +22,23 @@
 	</div>
 
 <script>
+
 	document.getElementById("send").addEventListener("click", function(){
 		var upcVal = document.getElementById("upcInp").value;
 
 		fetch("https://previews-bcit.herokuapp.com/barcode/" + upcVal).then(function(resp){
-			console.log(resp);
+			// console.log(resp);
 			return resp.json();
 		}).then(function(json){
-			console.log(json.errors[0].message);
+			console.log(json);
 			if(json.errors){
 				upcVal =''
 				alert("UPC not found!!!")
 				
 			}
-			var curID = json.items[0].itemId;
+			console.log(json.items[0].name)
+			
+			// document.getElementById("productID").innerHTML = n;
 			document.getElementById("productname").innerHTML = json.items[0].name;
 			document.getElementById("thumbs").src = json.items[0].largeImage;
 			document.getElementById("productprice").innerHTML = "$"+json.items[0].salePrice;
@@ -45,21 +49,19 @@
 
 	})
 
+	// document.getElementById("reviews").addEventListener("click", function(){
 
-
-	document.getElementById("reviews").addEventListener("click", function(){
-
-		fetch("https://previews-bcit.herokuapp.com/reviews/" + curID).then(function(resp){
-			console.log(resp);
-			return resp.json();
-		}).then(function(json){
+	// 	fetch("https://previews-bcit.herokuapp.com/reviews/" + curID).then(function(resp){
+		
+	// 		return resp.json();
+	// 	}).then(function(json){
 			
 
-			document.getElementById("reviewsBox").innerHTML = json.items[0].reviews;
+	// 		document.getElementById("reviewsBox").innerHTML = json.items[0].reviews;
 			
-		});
+	// 	});
 
-	})
+	// }) 
 </script>
 
 </body>

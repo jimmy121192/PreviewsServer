@@ -1,0 +1,38 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>LOOKUP API</title>
+	<link rel="stylesheet" href="./index.css">
+</head>
+<body>
+	<div id="controls">
+		<input type="text" id="upcInp" placeholder="Type Product ID">
+
+	</div>
+	<div id="display" >
+	
+		<button id="reviews">Show reviews</button>
+		<div id="reviewsBox" class="value"></div>
+
+	</div>
+
+<script>
+
+    var inpVal = document.getElementById("upcInp").value;
+	document.getElementById("reviews").addEventListener("click", function(){
+
+		fetch("https://previews-bcit.herokuapp.com/reviews/" + inpVal).then(function(resp){
+		
+			return resp.json();
+		}).then(function(json){
+			
+
+			document.getElementById("reviewsBox").innerHTML = json.items[0].reviews;
+			
+		});
+
+	})
+</script>
+
+</body>
+</html>

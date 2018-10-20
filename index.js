@@ -49,7 +49,7 @@ app.get("/reviews/:productid", function(req, resp){
         resp.json(json);
     });
 
-    console.log(upc)
+    console.log(productid)
 })
 
 
