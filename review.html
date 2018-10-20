@@ -25,7 +25,7 @@
 		
 			return resp.json();
 		}).then(function(json){
-			
+			console.log(json)
 
 			document.getElementById("reviewsBox").innerHTML = json.items[0].reviews;
 			

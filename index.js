@@ -35,7 +35,7 @@ app.get("/barcode/:upc", function(req, resp){
 app.get("/reviews/:productid", function(req, resp){
     var productid = req.params.productid;
     
-    fetch("http://api.walmartlabs.com/v1/reviews/"+productid+"?apiKey=c9tjdnbch2ehb7ta56qsv46k").then(function(resp){
+    fetch("http://api.walmartlabs.com/v1/reviews/380374895?apiKey=c9tjdnbch2ehb7ta56qsv46k").then(function(resp){
 			
         return resp.json();
     }).then(function(json){
