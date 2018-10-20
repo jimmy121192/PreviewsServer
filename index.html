@@ -15,6 +15,8 @@
 		Price: <div id="productprice" class="value"></div>
 		Stock: <div id="stock" class="value"></div>
 		Product Description: <div id="productdesc" class="value"></div>
+		<button id="reviews">Show reviews</button>
+		<div id="reviewsBox" class="value"></div>
 
 	</div>
 
@@ -26,12 +28,35 @@
 			console.log(resp);
 			return resp.json();
 		}).then(function(json){
-			console.log(json);
+			console.log(json.errors[0].message);
+			if(json.errors){
+				upcVal =''
+				alert("UPC not found!!!")
+				
+			}
+			var curID = json.items[0].itemId;
 			document.getElementById("productname").innerHTML = json.items[0].name;
 			document.getElementById("thumbs").src = json.items[0].largeImage;
 			document.getElementById("productprice").innerHTML = "$"+json.items[0].salePrice;
 			document.getElementById("stock").innerHTML =json.items[0].stock;
 			document.getElementById("productdesc").innerHTML = json.items[0].shortDescription;
+			
+		});
+
+	})
+
+
+
+	document.getElementById("reviews").addEventListener("click", function(){
+
+		fetch("https://previews-bcit.herokuapp.com/reviews/" + curID).then(function(resp){
+			console.log(resp);
+			return resp.json();
+		}).then(function(json){
+			
+
+			document.getElementById("reviewsBox").innerHTML = json.items[0].reviews;
+			
 		});
 
 	})

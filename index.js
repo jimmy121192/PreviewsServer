@@ -32,6 +32,26 @@ app.get("/barcode/:upc", function(req, resp){
 
     console.log(upc)
 })
+app.get("/reviews/:productid", function(req, resp){
+    var productid = req.params.productid;
+    
+    fetch("http://api.walmartlabs.com/v1/reviews/"+productid+"?apiKey=c9tjdnbch2ehb7ta56qsv46k").then(function(resp){
+			
+        return resp.json();
+    }).then(function(json){
+        console.log(json);
+        // document.getElementById("display").innerHTML = "";
+        // for (var i =0; i<json.length; i++){
+        // 	var ndiv = document.createElement("div");
+        // 	ndiv.innerHTML = json[i];
+        // 	document.getElementById('display').appendChild(ndiv);
+        // }
+        resp.json(json);
+    });
+
+    console.log(upc)
+})
+
 
 app.listen(port, function(err){
 
