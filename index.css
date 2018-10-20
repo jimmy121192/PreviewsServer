@@ -1,0 +1,12 @@
+#display{
+    width: 100%;
+    height: 100vh;
+}
+#thumbs{
+    margin-top: 100px;
+
+}
+.value{
+    margin: 30px;
+    color: green;
+}

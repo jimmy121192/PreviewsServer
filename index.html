@@ -2,13 +2,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>LOOKUP API</title>
+	<link rel="stylesheet" href="./index.css">
 </head>
 <body>
 	<div id="controls">
 		<input type="text" id="upcInp" placeholder="Type Your UPC here">
 		<button id="send">Send</button>
 	</div>
-	<div id="display"></div>
+	<div id="display" >
+		<img src='' id="thumbs"><br>
+		Product name: <div id="productname" class="value"></div>
+		Price: <div id="productprice" class="value"></div>
+		Stock: <div id="stock" class="value"></div>
+		Product Description: <div id="productdesc" class="value"></div>
+
+	</div>
 
 <script>
 	document.getElementById("send").addEventListener("click", function(){
@@ -19,12 +27,11 @@
 			return resp.json();
 		}).then(function(json){
 			console.log(json);
-			// document.getElementById("display").innerHTML = "";
-			// for (var i =0; i<json.length; i++){
-			// 	var ndiv = document.createElement("div");
-			// 	ndiv.innerHTML = json[i];
-			// 	document.getElementById('display').appendChild(ndiv);
-			// }
+			document.getElementById("productname").innerHTML = json.items[0].name;
+			document.getElementById("thumbs").src = json.items[0].largeImage;
+			document.getElementById("productprice").innerHTML = "$"+json.items[0].salePrice;
+			document.getElementById("stock").innerHTML =json.items[0].stock;
+			document.getElementById("productdesc").innerHTML = json.items[0].shortDescription;
 		});
 
 	})
