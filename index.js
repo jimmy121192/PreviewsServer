@@ -13,25 +13,25 @@ app.use(function(req, res, next) {
 
 
 // var results = [];
-app.get("/barcode/:upc", function(req, resp){
-    var upc = req.params.upc;
+// app.get("/barcode/:upc", function(req, resp){
+//     var upc = req.params.upc;
     
-    fetch("http://api.walmartlabs.com/v1/items?apiKey=c9tjdnbch2ehb7ta56qsv46k&upc=" + upc).then(function(resp){
+//     fetch("http://api.walmartlabs.com/v1/items?apiKey=c9tjdnbch2ehb7ta56qsv46k&upc=" + upc).then(function(resp){
 			
-        return resp.json();
-    }).then(function(json){
-        console.log(json);
-        // document.getElementById("display").innerHTML = "";
-        // for (var i =0; i<json.length; i++){
-        // 	var ndiv = document.createElement("div");
-        // 	ndiv.innerHTML = json[i];
-        // 	document.getElementById('display').appendChild(ndiv);
-        // }
-        resp.json(json);
-    });
+//         return resp.json();
+//     }).then(function(json){
+//         console.log(json);
+//         // document.getElementById("display").innerHTML = "";
+//         // for (var i =0; i<json.length; i++){
+//         // 	var ndiv = document.createElement("div");
+//         // 	ndiv.innerHTML = json[i];
+//         // 	document.getElementById('display').appendChild(ndiv);
+//         // }
+//         resp.json(json);
+//     });
 
-    console.log(upc)
-})
+//     console.log(upc)
+// })
 app.get("/reviews/:productid", function(req, resp){
     var productid = req.params.productid;
     
