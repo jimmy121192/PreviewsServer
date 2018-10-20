@@ -11,6 +11,18 @@ app.use(function(req, res, next) {
     next();
   });
 
+  app.get("/reviews/:productid", function(req, resp){
+    var productid = req.params.productid;
+    
+    fetch("http://api.walmartlabs.com/v1/reviews/"+productid+"?apiKey=c9tjdnbch2ehb7ta56qsv46k&format=json").then(function(resp){
+			
+        return resp.json();
+    }).then(function(json){
+        console.log(json);
+        resp.json(json);
+    });
+
+})
 app.get("/barcode/:upc", function(req, resp){
     var upc = req.params.upc;
     
@@ -23,18 +35,7 @@ app.get("/barcode/:upc", function(req, resp){
     });
 
 })
-app.get("/reviews/:productid", function(req, resp){
-    var productid = req.params.productid;
-    
-    fetch("http://api.walmartlabs.com/v1/reviews/380374895?apiKey=c9tjdnbch2ehb7ta56qsv46k").then(function(resp){
-			
-        return resp.json();
-    }).then(function(json){
-        console.log(json);
-        resp.json(json);
-    });
 
-})
 
 
 app.listen(port, function(err){

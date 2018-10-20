@@ -22,11 +22,11 @@
 	</div>
 
 <script>
-
+	var curID = null;
 	document.getElementById("send").addEventListener("click", function(){
 		var upcVal = document.getElementById("upcInp").value;
 
-		fetch("https://previews-bcit.herokuapp.com/barcode/" + upcVal).then(function(resp){
+		fetch("http://localhost:3000/barcode/" + upcVal).then(function(resp){
 			// console.log(resp);
 			return resp.json();
 		}).then(function(json){
@@ -36,32 +36,39 @@
 				alert("UPC not found!!!")
 				
 			}
-			console.log(json.items[0].name)
 			
-			// document.getElementById("productID").innerHTML = n;
+			
+			document.getElementById("productID").innerHTML = parseInt(json.items[0].itemId);
 			document.getElementById("productname").innerHTML = json.items[0].name;
 			document.getElementById("thumbs").src = json.items[0].largeImage;
 			document.getElementById("productprice").innerHTML = "$"+json.items[0].salePrice;
 			document.getElementById("stock").innerHTML =json.items[0].stock;
 			document.getElementById("productdesc").innerHTML = json.items[0].shortDescription;
-			
+			curID = parseInt(json.items[0].itemId)
+			console.log(curID)
 		});
 
 	})
 
-	// document.getElementById("reviews").addEventListener("click", function(){
+	document.getElementById("reviews").addEventListener("click", function(){
 
-	// 	fetch("https://previews-bcit.herokuapp.com/reviews/" + curID).then(function(resp){
+		fetch("http://localhost:3000/reviews/" + curID).then(function(resp){
 		
-	// 		return resp.json();
-	// 	}).then(function(json){
+			return resp.json();
+		}).then(function(reviews){
 			
-
-	// 		document.getElementById("reviewsBox").innerHTML = json.items[0].reviews;
+			console.log(reviews.reviews)
+		
+			document.getElementById("reviewsBox").innerHTML = "";
+			for (var i =0; i<reviews.reviews.length; i++){
+				var ndiv = document.createElement("div");
+				ndiv.innerHTML = reviews.reviews[i];
+				document.getElementById('display').appendChild(ndiv);
+			}
 			
-	// 	});
+		});
 
-	// }) 
+	}) 
 </script>
 
 </body>
