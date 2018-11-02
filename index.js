@@ -39,8 +39,8 @@ app.get("/barcode/:upc", function(req, resp){
 app.get("/search/:keyword", function(req, resp){
     var keyword = req.params.keyword;
     
-    fetch("http://api.walmartlabs.com/v1/search?apiKey={c9tjdnbch2ehb7ta56qsv46k}&query="+keyword+"&sort=price&order=asc").then(function(resp){
-        		
+    fetch("http://api.walmartlabs.com/v1/search?query="+keyword+"&format=json&apiKey=c9tjdnbch2ehb7ta56qsv46k").then(function(resp){
+        
         return resp.json();
     }).then(function(json){
         console.log(json);
