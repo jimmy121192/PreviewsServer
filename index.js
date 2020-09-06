@@ -4,7 +4,7 @@ var fetch = require('node-fetch');
 const port = process.env.PORT || 3000;
 
 
-
+//Previews
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -47,6 +47,22 @@ app.get("/search/:keyword", function(req, resp){
         resp.json(json);
     });
 
+})
+
+
+//Impetus Chat Server
+var io = require("socket.io")(server)
+
+    var chatSpace = io.of("/chat")
+    chatSpace.on("connection", (socket)=>{
+
+    socket.on("join_room", (data)=>{
+        socket.join(data.roomName);
+    })
+    console.log(socket.id+ " is connected");
+    socket.on("send_msg", (data)=>{
+        chatSpace.to(data.roomName).emit("incoming_msg", data)
+    })
 })
 
 
